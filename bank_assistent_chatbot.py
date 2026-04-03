@@ -148,8 +148,13 @@ async def llm_query(prompt: str) -> str:
         
         _chat_hist = await update_user_hist("1", human_message)
 
-        while True:
+        max_query = 5
+        
+        while max_query > 0:
+            
             result = model1.invoke(_chat_hist)
+            
+            max_query -= 1
             
             _chat_hist = update_user_hist(result)
             
